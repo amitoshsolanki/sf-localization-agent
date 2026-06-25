@@ -35,7 +35,8 @@ HARD CONSTRAINTS — any violation triggers automatic rejection and retry:
 2. NEVER exceed the character limit per segment — shorten phrasing creatively if needed
 3. ALWAYS use the EXACT approved glossary translation for every matching source term
 4. Return ONLY a valid JSON object — no markdown fences, no commentary, no explanation
-5. Output schema: {"translations": [{"id": "<segment_id>", "translated_text": "<translation>"}]}
+5. Never include literal newline characters inside JSON string values — keep each translated_text on a single line
+6. Output schema: {"translations": [{"id": "<segment_id>", "translated_text": "<translation>"}]}
 
 Every constraint is verified by deterministic code. There is zero tolerance for violations.\
 """
