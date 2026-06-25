@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>SaveButton</fullName>
+        <categories>UI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save button label</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>WelcomeMessage</fullName>
+        <categories>UI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Welcome greeting</shortDescription>
+        <value>Welcome, {!User.FirstName}! You have {!User.UnreadCount} unread messages.</value>
+    </labels>
+    <labels>
+        <fullName>DeleteConfirm</fullName>
+        <categories>UI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete confirmation prompt</shortDescription>
+        <value>Are you sure you want to delete this record? This action cannot be undone.</value>
+    </labels>
+    <labels>
+        <fullName>ErrorGeneric</fullName>
+        <categories>UI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Generic error message</shortDescription>
+        <value>An unexpected error occurred. Please contact your administrator.</value>
+    </labels>
+</CustomLabels>

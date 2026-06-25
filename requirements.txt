@@ -1,0 +1,29 @@
+# Core Framework
+langgraph==0.2.55
+langgraph-checkpoint-postgres==2.0.10
+langchain-core==0.3.25
+langchain-google-genai==2.0.7
+
+# Database
+sqlalchemy==2.0.36
+sqlmodel==0.0.22
+psycopg2-binary==2.9.10
+asyncpg==0.30.0
+psycopg[binary]>=3.1.1  # required by langgraph-checkpoint-postgres async saver
+
+# Google Gemini (default provider)
+google-generativeai==0.8.3
+
+# Optional LLM providers (install the one you need):
+# pip install langchain-anthropic   # for Claude
+# pip install langchain-ollama      # for local LLMs via Ollama
+# pip install langchain-openai      # for OpenAI
+
+# Config & Utilities
+python-dotenv==1.0.1
+pydantic==2.10.3
+pydantic-settings==2.6.1
+
+# Dev / Testing
+pytest==8.3.4
+pytest-asyncio==0.24.0

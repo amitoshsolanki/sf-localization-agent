@@ -1,0 +1,17 @@
+# Environment — contains secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Generated translation output files
+*.stf.out
+*.[a-z][a-z].stf
+
+# Editor / OS
+.DS_Store
+Thumbs.db

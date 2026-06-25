@@ -1,0 +1,23 @@
+# Salesforce.com Translation Workbench Export File
+# Use the Bilingual file to review translations.
+
+# Language: French
+Language code: fr
+Type: Bilingual
+Translation type: Metadata
+
+------------------TRANSLATED-------------------
+
+# KEY	LABEL	TRANSLATION	OUT OF DATE
+
+ButtonOrLink.Account.SendContract	Send Contract	Envoyer le contrat	-
+CustomLabel.SaveButton	Save	Sauvegarder	*
+
+------------------OUTDATED AND UNTRANSLATED-----------------
+
+# KEY	LABEL
+
+CustomLabel.WelcomeMessage	Welcome, {!User.FirstName}! You have {!User.UnreadCount} unread messages.
+CustomLabel.DeleteConfirm	Are you sure you want to delete this record? This action cannot be undone.
+CustomField.Account.Industry.FieldLabel	Industry
+CustomField.Account.Industry.HelpText	The company's primary business sector
