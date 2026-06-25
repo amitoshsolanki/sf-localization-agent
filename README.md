@@ -19,7 +19,7 @@ Parser → Translator → Auditor → Validator ──► Extractor → Done
 ## Prerequisites
 
 - Python 3.12+
-- Docker (for PostgreSQL)
+- PostgreSQL 14+ (running locally)
 - An API key for your chosen LLM provider
 
 ## Setup
@@ -37,10 +37,13 @@ cp .env.example .env
 # Edit .env with your API key and preferred LLM provider
 ```
 
-**3. Start the database**
+**3. Create the database**
 ```bash
-docker compose up -d db
+psql -U postgres -c "CREATE USER \"user\" WITH PASSWORD 'password';"
+psql -U postgres -c "CREATE DATABASE sf_localization OWNER \"user\";"
 ```
+
+Tables are created automatically on first run.
 
 ## Usage
 
@@ -85,10 +88,3 @@ python -m pytest tests/ -v
 
 No database or LLM API key required for tests.
 
-## Docker
-
-```bash
-docker compose up -d db       # start database
-docker compose down           # stop (keep data)
-docker compose down -v        # stop and wipe all data
-```

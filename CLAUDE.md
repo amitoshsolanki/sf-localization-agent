@@ -7,15 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 All commands run from `sf_localization_agent/`.
 
 ```bash
-# Start the PostgreSQL database (required before running the app)
-docker compose up -d db
-
-# Stop DB (keep data) / Stop and wipe all data
-docker compose down
-docker compose down -v
-
 # Inspect the database directly
-docker exec sf_localization_agent-db-1 psql -U user -d sf_localization -c "SELECT * FROM glossary_terms;"
+psql -U user -d sf_localization -c "SELECT * FROM glossary_terms;"
 
 # Run the agent
 python -m app --input <path/to/file.stf>
@@ -73,7 +66,7 @@ Both `translator_node` and `extractor_node` use `.with_structured_output(..., me
 
 ## Database
 
-PostgreSQL runs on port **5433** (not 5432 — avoids conflict with a local install). Tables are created automatically by `create_tables()` on startup.
+PostgreSQL runs locally on port **5432**. Tables are created automatically by `create_tables()` on startup.
 
 - **`glossary_terms`** — Curated approved translations. Only rows with `approved=True` are fetched by the parser and enforced by the auditor. Auto-extracted terms land here with `approved=False`.
 - **`translation_memory`** — Schema exists but no node writes to it.
