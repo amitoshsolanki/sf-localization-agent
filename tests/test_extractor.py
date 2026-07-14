@@ -120,6 +120,43 @@ async def test_noop_when_no_output():
 
 
 @pytest.mark.asyncio
+async def test_filters_terms_longer_than_two_words():
+    """Only 1- and 2-word source terms are inserted; longer phrases are dropped."""
+    from app.nodes.extractor import extractor_node
+
+    segments = [
+        {"id": "s1", "source_text": "Send Contract", "component_type": "ButtonOrLink",
+         "component_key": "s1", "merge_fields": [], "char_limit": 255, "line_index": 5},
+    ]
+    translated = [{"id": "s1", "translated_text": "Envoyer le contrat"}]
+
+    mock_llm = _mock_llm_response([
+        {"source_term": "Industry", "translated_term": "Industrie"},
+        {"source_term": "Send Contract", "translated_term": "Envoyer le contrat"},
+        {"source_term": "Please enter a valid value", "translated_term": "Veuillez saisir une valeur valide"},
+    ])
+
+    mock_session = AsyncMock()
+    mock_result = MagicMock()
+    mock_result.scalars.return_value.first.return_value = None
+    mock_session.execute = AsyncMock(return_value=mock_result)
+    mock_session.commit = AsyncMock()
+    mock_session.add = MagicMock()
+
+    mock_ctx = AsyncMock()
+    mock_ctx.__aenter__ = AsyncMock(return_value=mock_session)
+    mock_ctx.__aexit__ = AsyncMock(return_value=False)
+
+    with patch("app.nodes.extractor._get_llm", return_value=mock_llm), \
+         patch("app.nodes.extractor.AsyncSessionLocal", return_value=mock_ctx):
+        result = await extractor_node(_make_state(segments, translated))
+
+    assert result["extracted_glossary_count"] == 2
+    added_sources = [call.args[0].source_term for call in mock_session.add.call_args_list]
+    assert added_sources == ["Industry", "Send Contract"]
+
+
+@pytest.mark.asyncio
 async def test_returns_correct_count_with_mixed():
     """Some terms are new, some already exist — count reflects only new inserts."""
     from app.nodes.extractor import extractor_node

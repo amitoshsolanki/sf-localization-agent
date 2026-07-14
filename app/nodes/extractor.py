@@ -11,6 +11,9 @@ from app.state import AgentState
 from app.utils.prompts import GLOSSARY_EXTRACT_SYSTEM, build_glossary_extract_prompt
 
 
+MAX_TERM_WORDS = 2
+
+
 class _GlossaryEntry(BaseModel):
     source_term: str
     translated_term: str
@@ -60,6 +63,9 @@ async def extractor_node(state: AgentState) -> dict[str, Any]:
             source = entry.source_term.strip()
             translated_term = entry.translated_term.strip()
             if not source or not translated_term:
+                continue
+            # Glossary terms must be single concepts; the source is the lookup key
+            if len(source.split()) > MAX_TERM_WORDS:
                 continue
 
             existing = await session.execute(

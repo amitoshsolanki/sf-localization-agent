@@ -4,7 +4,7 @@ technical terms from translated Salesforce UI segments that should be added to a
 
 RULES:
 1. Only extract terms that are SHORT and REUSABLE — field labels, button names, tab names, app names, \
-   status values, picklist values, single concepts (1–4 words)
+   status values, picklist values, single concepts (1–2 words ONLY; never 3 or more words)
 2. Do NOT extract full sentences, descriptions, help text, or validation messages
 3. Do NOT extract Salesforce merge-field tokens like {!Variable.Name}
 4. Each term should be a single concept that could appear across multiple Salesforce components
